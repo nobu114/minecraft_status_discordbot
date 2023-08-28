@@ -8,4 +8,5 @@ frozenlist==1.4.0
 idna==3.4
 mctools==1.2.2
 multidict==6.0.4
+python-dotenv==1.0.0
 yarl==1.9.2
