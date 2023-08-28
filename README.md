@@ -1,0 +1,2 @@
+# minecraft_status_discordbot
+Minecraftサーバーに参加しているプレイヤー人数をbotのステータス部に表示するためのコード
