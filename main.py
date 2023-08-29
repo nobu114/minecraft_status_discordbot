@@ -35,7 +35,7 @@ class MyClient(discord.Client):
             try:
                 stats = ping.get_stats()
                 numplayers = stats["players"]["online"]
-                activity = discord.Game(f"{numplayers}人がオンライン")
+                activity = discord.Game(f"{numplayers}人がMinecraft")
                 status = discord.Status.online
             except:
                 activity = discord.CustomActivity(name="サーバーはオフライン")
