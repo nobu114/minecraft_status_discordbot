@@ -14,6 +14,7 @@ load_dotenv(dotenv_path)
 
 TOKEN = os.environ.get("TOKEN")
 MC_SERVER_ADDRESS = os.environ.get("MC_SERVER_ADDRESS")
+MC_SERVER_PORT = os.environ.get("MC_SERVER_PORT")
 
 if TOKEN is None:
     print(".envファイルにTOKENを設定して下さい")
@@ -27,20 +28,20 @@ class MyClient(discord.Client):
             sys.exit(1)
         print(f"Logged on as {self.user}")
         while True:
-            ping = PINGClient(MC_SERVER_ADDRESS)
+            if MC_SERVER_PORT is None:
+                ping = PINGClient(MC_SERVER_ADDRESS)
+            else:
+                ping = PINGClient(MC_SERVER_ADDRESS, port=int(MC_SERVER_PORT))
             try:
                 stats = ping.get_stats()
                 numplayers = stats["players"]["online"]
                 game = discord.Game(f"{numplayers}人がオンライン")
                 status = discord.Status.online
             except:
-                game = discord.Game("サーバーはオフライン")
+                game = discord.Activity(state="サーバーはオフライン")
                 status = discord.Status.idle
-                await client.change_presence(status=status, activity=game)
-                await asyncio.sleep(1)
-
-    async def on_message(self, message):
-        print(f"Message from {message.author}: {message.content}")
+            await client.change_presence(status=status, activity=game)
+            await asyncio.sleep(1)
 
 
 intents = discord.Intents.default()
