@@ -35,12 +35,12 @@ class MyClient(discord.Client):
             try:
                 stats = ping.get_stats()
                 numplayers = stats["players"]["online"]
-                game = discord.Game(f"{numplayers}人がオンライン")
+                activity = discord.Game(f"{numplayers}人がオンライン")
                 status = discord.Status.online
             except:
-                game = discord.Activity(state="サーバーはオフライン")
+                activity = discord.CustomActivity(name="サーバーはオフライン")
                 status = discord.Status.idle
-            await client.change_presence(status=status, activity=game)
+            await client.change_presence(status=status, activity=activity)
             await asyncio.sleep(1)
 
 
