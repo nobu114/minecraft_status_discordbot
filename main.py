@@ -40,7 +40,10 @@ class MyClient(discord.Client):
             except:
                 activity = discord.CustomActivity(name="サーバーはオフライン")
                 status = discord.Status.idle
-            await client.change_presence(status=status, activity=activity)
+            try:
+                await self.change_presence(status=status, activity=activity)
+            except:
+                pass
             await asyncio.sleep(1)
 
 
